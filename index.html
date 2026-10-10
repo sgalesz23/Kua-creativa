@@ -1,0 +1,388 @@
+﻿<!doctype html>
+<html lang="es" class="scroll-smooth">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kua creativa — Gigantografía, diseño e instalación en Naguanagua</title>
+<meta name="description" content="Agencia en Naguanagua, Carabobo: diseño gráfico, impresión en gran formato, imagen corporativa, stickers e instalación profesional de vinilos publicitarios.">
+<meta name="theme-color" content="#0D0D0D">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23E63946'/%3E%3Cpath d='M11 8v16M11 16l9-8M11 16l9 8' stroke='%23fff' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+
+<body>
+
+<!-- ============ PRELOADER ============ -->
+<div id="preloader" aria-hidden="true">
+  <div class="pl-logo">
+    <svg id="plMark" width="56" height="56" viewBox="0 0 32 32" fill="none" class="shrink-0"><circle cx="16" cy="16" r="16" fill="#E63946"/><path d="M11 8v16M11 16l9-8M11 16l9 8" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>
+    <div id="plText" class="font-display text-5xl md:text-7xl tracking-tight leading-none"></div>
+  </div>
+  <div class="w-48 md:w-64 h-px bg-white/10 relative overflow-hidden"><i id="plBar" class="absolute inset-y-0 left-0 w-full bg-coral origin-left scale-x-0"></i></div>
+  <div class="font-display text-xs tracking-[.3em] text-white/40"><span id="plCount">0</span>%</div>
+</div>
+
+<!-- Cursor -->
+<div id="cursor-dot"></div><div id="cursor-ring"><span id="cursor-label"></span></div>
+
+<!-- ============ HEADER ============ -->
+<header id="header" class="fixed top-0 inset-x-0 z-50 transition-transform duration-500">
+  <div id="headerBar" class="mx-auto max-w-7xl px-5 md:px-8 h-20 flex items-center justify-between transition-all duration-500">
+    <a href="#inicio" class="flex items-center gap-2.5 hero-in" aria-label="kua creativa — inicio">
+      <svg width="34" height="34" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#E63946"/><path d="M11 8v16M11 16l9-8M11 16l9 8" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>
+      <span class="font-display text-xl tracking-tight"><b class="font-bold">kua</b> <span class="text-white/70">creativa</span></span>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-9 text-sm text-white/70 hero-in" aria-label="Principal">
+      <a class="nav-link link-u hover:text-white transition-colors" href="#inicio">Inicio</a>
+      <a class="nav-link link-u hover:text-white transition-colors" href="#servicios">Servicios</a>
+      <a class="nav-link link-u hover:text-white transition-colors" href="#portafolio">Portafolio</a>
+      <a class="nav-link link-u hover:text-white transition-colors" href="#nosotros">Nosotros</a>
+      <a class="nav-link link-u hover:text-white transition-colors" href="#contacto">Contacto</a>
+    </nav>
+
+    <div class="flex items-center gap-3 hero-in">
+      <a data-wa="Hola kua creativa, quisiera solicitar una cotización." target="_blank" rel="noopener" class="magnetic hidden sm:inline-flex items-center gap-2 bg-coral hover:bg-white hover:text-ink text-white text-sm font-medium px-5 py-2.5 rounded-full transition-colors duration-300">
+        Solicitar Cotización
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+      </a>
+      <button id="menuBtn" class="lg:hidden w-11 h-11 grid place-items-center rounded-full border border-white/15 bg-ink/60 backdrop-blur" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="relative block w-5 h-3.5"><i class="absolute left-0 top-0 w-full h-0.5 bg-white transition-all duration-300" id="b1"></i><i class="absolute left-0 bottom-0 w-full h-0.5 bg-white transition-all duration-300" id="b2"></i></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Menú móvil -->
+<div id="mobileMenu" class="fixed inset-0 z-40 bg-ink/[.98] flex-col justify-center px-8 hidden" style="clip-path: inset(0 0 100% 0)">
+  <nav class="flex flex-col gap-2 font-display text-5xl tracking-tight" aria-label="Móvil">
+    <a class="m-link py-2 hover:text-coral transition-colors" href="#inicio">Inicio</a>
+    <a class="m-link py-2 hover:text-coral transition-colors" href="#servicios">Servicios</a>
+    <a class="m-link py-2 hover:text-coral transition-colors" href="#portafolio">Portafolio</a>
+    <a class="m-link py-2 hover:text-coral transition-colors" href="#nosotros">Nosotros</a>
+    <a class="m-link py-2 hover:text-coral transition-colors" href="#contacto">Contacto</a>
+  </nav>
+  <a data-wa="Hola kua creativa, quisiera solicitar una cotización." target="_blank" rel="noopener" class="mt-10 inline-flex w-fit items-center gap-2 bg-coral text-white font-medium px-6 py-3.5 rounded-full">Escríbenos por WhatsApp</a>
+</div>
+
+<main>
+<!-- ============ HERO ============ -->
+<section id="inicio" class="relative min-h-[100svh] flex items-center pt-28 pb-24 overflow-hidden grain">
+  <!-- Slot de video loop: añade <source src="assets/hero.mp4"> para activarlo -->
+  <video id="heroVideo" class="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none" autoplay muted loop playsinline aria-hidden="true">
+    <!-- <source src="assets/hero.mp4" type="video/mp4"> -->
+  </video>
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute -top-40 -right-32 w-[640px] h-[640px] blob blob-coral float-a"></div>
+    <div class="absolute bottom-[-220px] -left-40 w-[520px] h-[520px] blob blob-wine float-b"></div>
+    <div class="absolute inset-0 opacity-[.07]" style="background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 80px 80px; mask-image: radial-gradient(ellipse at 60% 40%, #000 20%, transparent 70%); -webkit-mask-image: radial-gradient(ellipse at 60% 40%, #000 20%, transparent 70%);"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-7xl w-full px-5 md:px-8 grid lg:grid-cols-12 gap-14 items-center">
+    <div class="lg:col-span-7">
+      <p class="hero-in inline-flex items-center gap-2.5 text-xs tracking-[.22em] uppercase text-white/60 mb-7">
+        <span class="w-8 h-px bg-coral"></span> Estudio creativo · Naguanagua, Carabobo
+      </p>
+      <h1 id="heroTitle" class="font-display font-bold tracking-tight leading-[1.02] text-[clamp(2.5rem,6.4vw,5.6rem)]">
+        <span class="mask-line"><span>Transformamos</span></span>
+        <span class="mask-line"><span>tu</span></span>
+        <span class="mask-line"><span>imagen</span></span>
+        <span class="mask-line"><span>en</span></span>
+        <span class="mask-line"><span class="text-coral">un&nbsp;impacto</span></span>
+        <span class="mask-line"><span class="text-coral">visual</span></span>
+        <span class="mask-line"><span>de</span></span>
+        <span class="mask-line"><span>gran</span></span>
+        <span class="mask-line"><span>formato</span></span>
+      </h1>
+
+      <p id="heroSub" class="hero-in mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 font-display text-base md:text-lg text-white/40" aria-label="Diseño Gráfico, Gigantografía, Imagen Corporativa, Instalaciones">
+        <span class="sub-item transition-colors duration-500">Diseño Gráfico</span><i class="text-white/20 not-italic">|</i>
+        <span class="sub-item transition-colors duration-500">Gigantografía</span><i class="text-white/20 not-italic">|</i>
+        <span class="sub-item transition-colors duration-500">Imagen Corporativa</span><i class="text-white/20 not-italic">|</i>
+        <span class="sub-item transition-colors duration-500">Instalaciones</span>
+      </p>
+
+      <div class="hero-in mt-10 flex flex-wrap items-center gap-4">
+        <a data-wa="Hola kua creativa, quisiera cotizar un proyecto." target="_blank" rel="noopener" class="magnetic pulse inline-flex items-center gap-3 bg-coral text-white font-medium px-8 py-4 rounded-full hover:bg-white hover:text-ink transition-colors duration-300">
+          Solicitar Cotización
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#portafolio" class="inline-flex items-center gap-2 px-6 py-4 rounded-full border border-white/15 text-white/80 hover:text-white hover:border-white/50 transition-colors">Ver proyectos</a>
+      </div>
+    </div>
+
+    <!-- Composición visual -->
+    <div class="lg:col-span-5 hero-in relative hidden md:block" id="heroVisual" aria-hidden="true">
+      <div class="relative mx-auto w-full max-w-md aspect-[4/5]">
+        <div data-depth="12" class="hv-layer absolute inset-0 rounded-3xl border border-white/10 bg-panel overflow-hidden shadow-2xl shadow-black/60">
+          <img id="heroArt" alt="" width="448" height="560" decoding="async" class="w-full h-full object-cover">
+        </div>
+        <!-- Marcas de registro -->
+        <svg data-depth="-6" class="hv-layer absolute -top-5 -left-5 w-12 h-12 text-coral" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="20" cy="20" r="9"/><path d="M20 0v40M0 20h40"/></svg>
+        <svg data-depth="-6" class="hv-layer absolute -bottom-5 -right-5 w-12 h-12 text-white/50" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="20" cy="20" r="9"/><path d="M20 0v40M0 20h40"/></svg>
+        <div data-depth="26" class="hv-layer absolute -left-10 bottom-16 bg-ink/85 backdrop-blur border border-white/10 rounded-2xl px-5 py-4">
+          <p class="text-[10px] tracking-[.2em] uppercase text-white/40">Gran formato</p>
+          <p class="font-display text-lg">Lona · Vinil · Microperforado</p>
+        </div>
+        <div data-depth="34" class="hv-layer absolute -right-6 top-14 bg-coral rounded-2xl px-5 py-4 shadow-xl shadow-coral/30">
+          <p class="text-[10px] tracking-[.2em] uppercase text-white/70">Acabado</p>
+          <p class="font-display text-lg">Alta definición</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#servicios" class="hero-in absolute bottom-7 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-[10px] tracking-[.3em] uppercase text-white/40 hover:text-white transition-colors" aria-label="Bajar a servicios">
+    Scroll <span class="w-px h-9 bg-gradient-to-b from-coral to-transparent"></span>
+  </a>
+</section>
+
+<!-- Marquee -->
+<div class="border-y border-line bg-coal py-5 overflow-hidden" aria-hidden="true">
+  <div class="marquee-track font-display text-2xl md:text-3xl uppercase tracking-tight text-white/25" id="marquee"></div>
+</div>
+
+<!-- ============ SERVICIOS ============ -->
+<section id="servicios" class="relative py-28 md:py-40">
+  <div class="mx-auto max-w-7xl px-5 md:px-8">
+    <div class="grid md:grid-cols-12 gap-8 items-end mb-16 md:mb-20">
+      <div class="md:col-span-7">
+        <p data-reveal class="text-xs tracking-[.22em] uppercase text-coral mb-5">( 01 ) Servicios</p>
+        <h2 data-reveal class="font-display font-bold tracking-tight leading-[1.04] text-[clamp(2.2rem,5vw,4.2rem)]">Todo lo que tu marca necesita para <span class="text-white/40">verse grande.</span></h2>
+      </div>
+      <p data-reveal class="md:col-span-4 md:col-start-9 text-white/55 leading-relaxed">Del concepto a la instalación: un solo equipo diseña, imprime y monta, para que el resultado final sea exactamente lo que imaginaste.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5" id="svcGrid">
+      <article data-reveal class="glow svc bg-panel border border-line rounded-3xl p-7 md:p-8 flex flex-col min-h-[380px]">
+        <div class="svc-icon w-14 h-14 rounded-2xl bg-white/5 text-coral grid place-items-center mb-auto">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="12" rx="1.5"/><path d="M8 21l1.5-6M16 21l-1.5-6M6 9l3-2 3 3 3-4 3 3"/></svg>
+        </div>
+        <span class="font-display text-xs text-white/30 mt-10 mb-3">01</span>
+        <h3 class="font-display text-2xl leading-tight mb-3">Gigantografía e Impresión</h3>
+        <p class="text-white/55 text-sm leading-relaxed">Impresión de gran formato con acabados de alta definición: lonas, vallas, banners y microperforado.</p>
+      </article>
+
+      <article data-reveal class="glow svc bg-panel border border-line rounded-3xl p-7 md:p-8 flex flex-col min-h-[380px]">
+        <div class="svc-icon w-14 h-14 rounded-2xl bg-white/5 text-coral grid place-items-center mb-auto">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7-3-3-7 7-1 4 4-1z"/><path d="M15 6l3 3M4 4l6 2M4 4l2 6"/></svg>
+        </div>
+        <span class="font-display text-xs text-white/30 mt-10 mb-3">02</span>
+        <h3 class="font-display text-2xl leading-tight mb-3">Diseño e Imagen Corporativa</h3>
+        <p class="text-white/55 text-sm leading-relaxed">Identidad de marca, logotipos y branding completo para que tu negocio se reconozca a primera vista.</p>
+      </article>
+
+      <article data-reveal class="glow svc bg-panel border border-line rounded-3xl p-7 md:p-8 flex flex-col min-h-[380px]">
+        <div class="svc-icon w-14 h-14 rounded-2xl bg-white/5 text-coral grid place-items-center mb-auto">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h8l6 6v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M14 3v4a2 2 0 0 0 2 2h4M9 14l2 2 4-4"/></svg>
+        </div>
+        <span class="font-display text-xs text-white/30 mt-10 mb-3">03</span>
+        <h3 class="font-display text-2xl leading-tight mb-3">Stickers y Material P.O.P.</h3>
+        <p class="text-white/55 text-sm leading-relaxed">Vinilos adhesivos, etiquetas y piezas promocionales troqueladas para destacar en el punto de venta.</p>
+      </article>
+
+      <article data-reveal class="glow svc bg-panel border border-line rounded-3xl p-7 md:p-8 flex flex-col min-h-[380px]">
+        <div class="svc-icon w-14 h-14 rounded-2xl bg-white/5 text-coral grid place-items-center mb-auto">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.2-.5-.5-2.2z"/></svg>
+        </div>
+        <span class="font-display text-xs text-white/30 mt-10 mb-3">04</span>
+        <h3 class="font-display text-2xl leading-tight mb-3">Instalación Profesional</h3>
+        <p class="text-white/55 text-sm leading-relaxed">Montaje técnico de publicidad exterior e interior: fachadas, vitrinas, flotas, paredes y estructuras.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BANNER PARALLAX ============ -->
+<section class="relative h-[70vh] min-h-[460px] overflow-hidden grain" aria-label="Gran formato">
+  <img id="bannerImg" alt="" decoding="async" class="absolute left-0 w-full h-[130%] -top-[15%] object-cover opacity-80">
+  <div class="absolute inset-0 bg-gradient-to-r from-ink via-ink/70 to-ink/20"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink"></div>
+  <div class="relative h-full mx-auto max-w-7xl px-5 md:px-8 flex flex-col justify-center">
+    <p data-reveal class="text-xs tracking-[.22em] uppercase text-coral mb-5">Sin límites de escala</p>
+    <h2 data-reveal class="font-display font-bold tracking-tight leading-[1.02] text-[clamp(2.4rem,6vw,5.4rem)] max-w-3xl">Del archivo digital <br>al muro, a la fachada, <br><span class="text-coral">a la calle.</span></h2>
+  </div>
+</section>
+
+<!-- ============ PORTAFOLIO ============ -->
+<section id="portafolio" class="py-28 md:py-40">
+  <div class="mx-auto max-w-7xl px-5 md:px-8">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
+      <div>
+        <p data-reveal class="text-xs tracking-[.22em] uppercase text-coral mb-5">( 02 ) Portafolio</p>
+        <h2 data-reveal class="font-display font-bold tracking-tight leading-[1.04] text-[clamp(2.2rem,5vw,4.2rem)]">Trabajos que <span class="text-white/40">se ven.</span></h2>
+      </div>
+      <div data-reveal class="flex flex-wrap gap-2.5" role="group" aria-label="Filtrar proyectos" id="filters">
+        <button class="filter-btn px-5 py-2.5 rounded-full border border-white/15 text-sm text-white/80 hover:border-white/50 transition-colors" data-filter="all" aria-pressed="true">Todos</button>
+        <button class="filter-btn px-5 py-2.5 rounded-full border border-white/15 text-sm text-white/80 hover:border-white/50 transition-colors" data-filter="Instalaciones" aria-pressed="false">Instalaciones</button>
+        <button class="filter-btn px-5 py-2.5 rounded-full border border-white/15 text-sm text-white/80 hover:border-white/50 transition-colors" data-filter="Impresiones" aria-pressed="false">Impresiones</button>
+        <button class="filter-btn px-5 py-2.5 rounded-full border border-white/15 text-sm text-white/80 hover:border-white/50 transition-colors" data-filter="Diseño" aria-pressed="false">Diseño</button>
+      </div>
+    </div>
+
+    <div id="grid" class="columns-1 sm:columns-2 lg:columns-3 gap-5"></div>
+  </div>
+</section>
+
+<!-- ============ NOSOTROS ============ -->
+<section id="nosotros" class="py-28 md:py-40 bg-coal border-y border-line relative overflow-hidden">
+  <div class="absolute -right-40 top-10 w-[500px] h-[500px] blob blob-coral-soft pointer-events-none"></div>
+  <div class="relative mx-auto max-w-7xl px-5 md:px-8 grid lg:grid-cols-12 gap-14">
+    <div class="lg:col-span-5">
+      <p data-reveal class="text-xs tracking-[.22em] uppercase text-coral mb-5">( 03 ) Nosotros</p>
+      <h2 data-reveal class="font-display font-bold tracking-tight leading-[1.04] text-[clamp(2.2rem,4.6vw,3.8rem)] mb-8">Creatividad con <span class="text-white/40">precisión técnica.</span></h2>
+      <p data-reveal class="text-white/60 leading-relaxed mb-5">Somos <strong class="text-white font-medium">kua creativa</strong>, un estudio en Naguanagua que combina diseño gráfico con producción e instalación propias. Entendemos que una buena idea solo funciona si se imprime bien y se instala mejor.</p>
+      <p data-reveal class="text-white/60 leading-relaxed">Acompañamos a negocios, emprendedores y empresas de Carabobo en cada paso: desde la identidad de marca hasta la pieza final instalada en su fachada, vehículo o local.</p>
+    </div>
+
+    <ol class="lg:col-span-7 grid sm:grid-cols-2 gap-5 self-start">
+      <li data-reveal class="bg-panel border border-line rounded-3xl p-7"><span class="font-display text-coral text-sm">01</span><h3 class="font-display text-xl mt-4 mb-2">Brief y asesoría</h3><p class="text-sm text-white/55 leading-relaxed">Escuchamos tu necesidad, medimos el espacio y recomendamos materiales y formatos.</p></li>
+      <li data-reveal class="bg-panel border border-line rounded-3xl p-7 sm:translate-y-8"><span class="font-display text-coral text-sm">02</span><h3 class="font-display text-xl mt-4 mb-2">Diseño</h3><p class="text-sm text-white/55 leading-relaxed">Creamos la propuesta gráfica y la ajustamos contigo hasta que sea la correcta.</p></li>
+      <li data-reveal class="bg-panel border border-line rounded-3xl p-7"><span class="font-display text-coral text-sm">03</span><h3 class="font-display text-xl mt-4 mb-2">Producción</h3><p class="text-sm text-white/55 leading-relaxed">Impresión en gran formato con control de color y acabados en alta definición.</p></li>
+      <li data-reveal class="bg-panel border border-line rounded-3xl p-7 sm:translate-y-8"><span class="font-display text-coral text-sm">04</span><h3 class="font-display text-xl mt-4 mb-2">Instalación</h3><p class="text-sm text-white/55 leading-relaxed">Montaje profesional, limpio y seguro, en exteriores e interiores.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ UBICACIÓN ============ -->
+<section id="ubicacion" class="py-28 md:py-40">
+  <div class="mx-auto max-w-7xl px-5 md:px-8">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-stretch">
+      <div class="lg:col-span-4 flex flex-col">
+        <p data-reveal class="text-xs tracking-[.22em] uppercase text-coral mb-5">( 04 ) Ubicación &amp; Cobertura</p>
+        <h2 data-reveal class="font-display font-bold tracking-tight leading-[1.04] text-[clamp(2rem,4vw,3.2rem)] mb-6">Visítanos en <span class="text-white/40">Naguanagua.</span></h2>
+        <address data-reveal class="not-italic text-white/60 leading-relaxed mb-8">
+          <strong class="text-white font-medium">C.C. Biarritz</strong><br>
+          Naguanagua, Valencia<br>Estado Carabobo, Venezuela
+        </address>
+        <div data-reveal class="mb-8">
+          <p class="text-xs tracking-[.2em] uppercase text-white/40 mb-3">Cobertura</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3.5 py-1.5 rounded-full border border-line text-sm text-white/70">Naguanagua</span>
+            <span class="px-3.5 py-1.5 rounded-full border border-line text-sm text-white/70">Valencia</span>
+            <span class="px-3.5 py-1.5 rounded-full border border-line text-sm text-white/70">San Diego</span>
+            <span class="px-3.5 py-1.5 rounded-full border border-line text-sm text-white/70">Resto de Carabobo</span>
+          </div>
+        </div>
+        <a data-reveal id="dirLink" target="_blank" rel="noopener" class="mt-auto inline-flex w-fit items-center gap-2 border border-white/20 hover:bg-white hover:text-ink px-6 py-3.5 rounded-full text-sm font-medium transition-colors duration-300">
+          Cómo llegar
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        </a>
+      </div>
+      <div data-reveal class="lg:col-span-8 relative rounded-3xl overflow-hidden border border-line h-[420px] lg:h-[540px]">
+        <div id="map" class="absolute inset-0" role="region" aria-label="Mapa de la ubicación de kua creativa"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO / FOOTER ============ -->
+<section id="contacto" class="relative pt-28 md:pt-36 pb-10 bg-coal border-t border-line overflow-hidden">
+  <div class="absolute left-1/2 -translate-x-1/2 -top-48 w-[800px] h-[400px] blob blob-coral-soft pointer-events-none"></div>
+  <div class="relative mx-auto max-w-7xl px-5 md:px-8">
+    <div class="grid lg:grid-cols-12 gap-14">
+      <div class="lg:col-span-6">
+        <p data-reveal class="text-xs tracking-[.22em] uppercase text-coral mb-5">( 05 ) Contacto</p>
+        <h2 data-reveal class="font-display font-bold tracking-tight leading-[1] text-[clamp(2.6rem,6vw,5.2rem)] mb-8">Hablemos de tu <span class="text-coral">próximo proyecto.</span></h2>
+        <p data-reveal class="text-white/60 leading-relaxed max-w-md mb-10">Cuéntanos qué necesitas y te respondemos por WhatsApp con asesoría y cotización.</p>
+        <div data-reveal class="flex flex-col gap-3 text-white/80">
+          <a data-wa="Hola kua creativa, quisiera información." target="_blank" rel="noopener" class="inline-flex w-fit items-center gap-3 link-u hover:text-white"><span class="w-9 h-9 rounded-full bg-white/5 grid place-items-center text-coral"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0 12 12 0 0 0 1.7 17.9L0 24l6.3-1.6A12 12 0 0 0 24 12a11.9 11.9 0 0 0-3.5-8.5zM12 22a9.9 9.9 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A10 10 0 1 1 12 22zm5.5-7.5c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8.2 8.2 0 0 1-4.1-3.6c-.3-.5.3-.5.9-1.6a.6.6 0 0 0 0-.6c-.1-.1-.7-1.7-1-2.300-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.700 3.700 0 0 0-1.100 2.700 6.400 6.400 0 0 0 1.300 3.400 14.600 14.600 0 0 0 5.600 4.900c2.100.9 2.900.9 3.400.8a2.900 2.900 0 0 0 1.900-1.400 2.300 2.300 0 0 0 .2-1.400c-.1-.1-.3-.2-.6-.3z"/></svg></span>Escríbenos por WhatsApp</a>
+          <a id="igLink" target="_blank" rel="noopener" class="inline-flex w-fit items-center gap-3 link-u hover:text-white"><span class="w-9 h-9 rounded-full bg-white/5 grid place-items-center text-coral"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.500" cy="6.500" r="1" fill="currentColor"/></svg></span><span id="igText">Instagram</span></a>
+        </div>
+      </div>
+
+      <form id="quoteForm" data-reveal class="lg:col-span-6 bg-panel border border-line rounded-3xl p-6 md:p-9 flex flex-col gap-5" novalidate>
+        <h3 class="font-display text-2xl">Solicita tu cotización</h3>
+        <div>
+          <label for="fName" class="text-xs tracking-[.15em] uppercase text-white/45 mb-2 block">Nombre</label>
+          <input id="fName" name="name" type="text" autocomplete="name" placeholder="Tu nombre" required>
+        </div>
+        <div>
+          <label for="fSvc" class="text-xs tracking-[.15em] uppercase text-white/45 mb-2 block">Servicio</label>
+          <select id="fSvc" name="service">
+            <option>Gigantografía e Impresión</option>
+            <option>Diseño e Imagen Corporativa</option>
+            <option>Stickers y Material P.O.P.</option>
+            <option>Instalación Profesional</option>
+            <option>Otro / Varios</option>
+          </select>
+        </div>
+        <div>
+          <label for="fMsg" class="text-xs tracking-[.15em] uppercase text-white/45 mb-2 block">Cuéntanos tu proyecto</label>
+          <textarea id="fMsg" name="msg" rows="4" placeholder="Medidas, ubicación, material, fecha estimada…"></textarea>
+        </div>
+        <p id="fErr" class="text-coral text-sm hidden" role="alert">Escribe tu nombre para continuar.</p>
+        <button type="submit" class="magnetic inline-flex items-center justify-center gap-3 bg-coral hover:bg-white hover:text-ink text-white font-medium px-8 py-4 rounded-full transition-colors duration-300">
+          Enviar por WhatsApp
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <p class="text-xs text-white/35">Se abrirá WhatsApp con tu mensaje listo para enviar.</p>
+      </form>
+    </div>
+
+    <footer class="mt-24 pt-8 border-t border-line flex flex-col md:flex-row gap-6 md:items-center md:justify-between text-sm text-white/45">
+      <a href="#inicio" class="flex items-center gap-2.5 text-white">
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#E63946"/><path d="M11 8v16M11 16l9-8M11 16l9 8" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>
+        <span class="font-display text-lg"><b>kua</b> <span class="text-white/70">creativa</span></span>
+      </a>
+      <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Pie de página">
+        <a class="hover:text-white transition-colors" href="#servicios">Servicios</a>
+        <a class="hover:text-white transition-colors" href="#portafolio">Portafolio</a>
+        <a class="hover:text-white transition-colors" href="#nosotros">Nosotros</a>
+        <a class="hover:text-white transition-colors" href="#ubicacion">Ubicación</a>
+      </nav>
+      <p>© <span id="year"></span> kua creativa · Naguanagua, Carabobo<br><span class="text-white/30">Fotografías de referencia: <a class="link-u" href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a></span></p>
+    </footer>
+  </div>
+</section>
+</main>
+
+<!-- WhatsApp flotante -->
+<a id="wa-float" data-wa="Hola kua creativa, quisiera más información." target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0 12 12 0 0 0 1.7 17.9L0 24l6.3-1.6A12 12 0 0 0 24 12a11.9 11.9 0 0 0-3.5-8.5zM12 22a9.9 9.9 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A10 10 0 1 1 12 22zm5.5-7.5c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-1 1.2-.4.2-.7.1a8.200 8.200 0 0 1-4.100-3.600c-.3-.5.3-.5.9-1.600a.6.6 0 0 0 0-.6c-.1-.1-.7-1.700-1-2.300-.2-.6-.5-.5-.7-.5h-.6a1.200 1.200 0 0 0-.9.4 3.700 3.700 0 0 0-1.100 2.700 6.400 6.400 0 0 0 1.300 3.400 14.600 14.600 0 0 0 5.600 4.900c2.100.9 2.900.9 3.400.8a2.900 2.900 0 0 0 1.900-1.400 2.300 2.300 0 0 0 .2-1.400c-.1-.1-.3-.2-.6-.3z"/></svg>
+</a>
+
+<!-- ============ MODAL PORTAFOLIO ============ -->
+<div id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle" aria-hidden="true">
+  <div id="mBackdrop" class="absolute inset-0 bg-black/80 backdrop-blur-sm opacity-0"></div>
+  <div id="mPanel" class="relative w-full max-w-5xl max-h-[92vh] overflow-y-auto bg-panel border border-line rounded-3xl grid md:grid-cols-2 opacity-0">
+    <div class="relative bg-coal min-h-[260px] md:min-h-[560px]">
+      <img id="mImg" alt="" class="absolute inset-0 w-full h-full object-cover">
+    </div>
+    <div class="p-7 md:p-10 flex flex-col">
+      <div class="flex items-start justify-between gap-4 mb-6">
+        <span id="mCat" class="text-xs tracking-[.2em] uppercase text-coral"></span>
+        <button id="mClose" class="w-10 h-10 shrink-0 grid place-items-center rounded-full border border-white/15 hover:bg-white hover:text-ink transition-colors" aria-label="Cerrar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+      <h3 id="mTitle" class="font-display font-bold text-3xl md:text-4xl tracking-tight leading-tight mb-5"></h3>
+      <p id="mDesc" class="text-white/60 leading-relaxed mb-8"></p>
+      <dl id="mSpecs" class="grid grid-cols-1 gap-3 mb-8 text-sm"></dl>
+      <div class="mt-auto flex flex-wrap items-center gap-3">
+        <a id="mCta" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-coral hover:bg-white hover:text-ink text-white font-medium px-6 py-3.5 rounded-full transition-colors duration-300">Cotizar algo similar</a>
+        <div class="flex gap-2 ml-auto">
+          <button id="mPrev" class="w-11 h-11 grid place-items-center rounded-full border border-white/15 hover:border-white transition-colors" aria-label="Proyecto anterior"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+          <button id="mNext" class="w-11 h-11 grid place-items-center rounded-full border border-white/15 hover:border-white transition-colors" aria-label="Proyecto siguiente"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+</html>
